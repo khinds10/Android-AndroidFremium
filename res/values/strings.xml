@@ -1,5 +1,10 @@
 <resources>
+
+    <!-- Google, Amazon, Nook -->
+    <string name="device_market_place">Google</string>
+    <string name="app_publisher_name">Kevin Hinds</string>
     <string name="app_name">fremium</string>
     <string name="menu_settings">Settings</string>
     <string name="menu_bitstreet">Bitstreet Apps</string>
+
 </resources>
