@@ -30,18 +30,24 @@ public class MarketPlace {
 	/**
 	 * Assign the market where this application will live
 	 */
-	public MarketLocale marketLocale;
+	protected MarketLocale marketLocale;
 
 	/**
 	 * market place standard url for a browser to open the device market place
 	 */
-	public String packageName;
+	protected String packageName;
 
 	/**
 	 * intent to gather to return for the specific device
 	 */
 	protected Intent intent;
 
+	/**
+	 * construct MarketPlace
+	 * 
+	 * @param context
+	 * @param thisPackageName
+	 */
 	public MarketPlace(Context context, String thisPackageName) {
 		String deviceMarketPlaceName = context.getResources().getString(R.string.device_market_place);
 		packageName = thisPackageName;
@@ -55,38 +61,75 @@ public class MarketPlace {
 	}
 
 	/**
-	 * user clicks the view all apps option, gather the device specific intent
+	 * user clicks the view the premium app option, gather the device specific intent
 	 * 
-	 * @param itemId
 	 * @param context
 	 * @return
 	 */
-	public Intent viewAllApps(int itemId, Context context) {
+	public Intent viewPremiumAppIntent(Context context) {
+		return getMarketPlaceIntent(context, false);
+	}
+
+	/**
+	 * user clicks the view all apps option, gather the device specific intent
+	 * 
+	 * @param context
+	 * @return
+	 */
+	public Intent viewAllPublisherAppsIntent(Context context) {
+		return getMarketPlaceIntent(context, true);
+	}
+
+	/**
+	 * get the intent for the device specific marketplace either for a single app or all apps from the publisher
+	 * 
+	 * @param context
+	 * @param showAll
+	 * @return
+	 */
+	protected Intent getMarketPlaceIntent(Context context, boolean showAll) {
 
 		String appPublisherName = context.getResources().getString(R.string.app_publisher_name);
-		String appPublisherNameEscaped = appPublisherName.replace(" ", "+");
 		String deviceMarketPlaceWeburl = null;
+		intent = new Intent(Intent.ACTION_VIEW);
 
 		/** switch on marketLocale to get the right intent to open on the device */
 		switch (marketLocale) {
-
 		case GOOGLE:
-
-			intent = new Intent(Intent.ACTION_VIEW);
-			intent.setData(Uri.parse("market://search?q=pub:\"" + appPublisherName + "\""));
-			deviceMarketPlaceWeburl = "http://play.google.com/store/search?q=pub:" + appPublisherNameEscaped + "&c=apps";
-
+			if (showAll) {
+				intent.setData(Uri.parse("market://search?q=pub:\"" + appPublisherName + "\""));
+				appPublisherName = appPublisherName.replace(" ", "+");
+				deviceMarketPlaceWeburl = "http://play.google.com/store/search?q=pub:" + appPublisherName + "&c=apps";
+			} else {
+				intent.setData(Uri.parse("market://details?id=" + packageName));
+				deviceMarketPlaceWeburl = "http://play.google.com/store/apps/details?id=" + packageName;
+			}
+			break;
 		case AMAZON:
+			String showAllParam = "";
+			if (showAll) {
+				showAllParam = "&showAll=1";
+			}
 			intent = new Intent(Intent.ACTION_VIEW);
-			intent.setData(Uri.parse("amzn://apps/android?p=" + packageName + "&showAll=1"));
-			deviceMarketPlaceWeburl = "http://www.amazon.com/gp/mas/dl/android?p=" + packageName + "&showAll=1";
-
+			intent.setData(Uri.parse("amzn://apps/android?p=" + packageName + showAllParam));
+			deviceMarketPlaceWeburl = "http://www.amazon.com/gp/mas/dl/android?p=" + packageName + showAllParam;
+			break;
 		case NOOK:
-			intent = new Intent();
-			intent.setAction("com.bn.sdk.shop.details");
-			intent.putExtra("product_details_ean", "2940043350251");
+			if (showAll) {
+				intent = null;
+				appPublisherName = appPublisherName.replace(" ", "-").toLowerCase();
+				deviceMarketPlaceWeburl = "http://www.barnesandnoble.com/c/" + appPublisherName;
+			} else {
+				String deviceNookEANNumber = context.getResources().getString(R.string.device_nook_ean_number);
+				intent = new Intent();
+				intent.setAction("com.bn.sdk.shop.details");
+				intent.putExtra("product_details_ean", deviceNookEANNumber);
 
-		default:
+				String appName = context.getResources().getString(R.string.app_name);
+				appName = appName.replace(" ", "-").toLowerCase();
+				appPublisherName = appPublisherName.replace(" ", "-").toLowerCase();
+				deviceMarketPlaceWeburl = "http://search.barnesandnoble.com/" + appName + "/" + appPublisherName + "/e/" + deviceNookEANNumber;
+			}
 			break;
 		}
 
@@ -96,9 +139,9 @@ public class MarketPlace {
 		} else {
 			intent = new Intent(Intent.ACTION_VIEW, Uri.parse(deviceMarketPlaceWeburl));
 			if (MarketPlace.isIntentAvailable(context, intent)) {
-				return null;
+				return intent;
 			}
-			return intent;
+			return null;
 		}
 	}
 
@@ -109,7 +152,7 @@ public class MarketPlace {
 	 * @param intent
 	 * @return
 	 */
-	public static boolean isIntentAvailable(Context context, Intent intent) {
+	protected static boolean isIntentAvailable(Context context, Intent intent) {
 		final PackageManager packageManager = context.getPackageManager();
 		List<ResolveInfo> list = packageManager.queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY);
 		return list.size() > 0;

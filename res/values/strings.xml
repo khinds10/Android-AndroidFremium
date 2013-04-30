@@ -1,7 +1,8 @@
 <resources>
 
     <!-- Google, Amazon, Nook -->
-    <string name="device_market_place">Google</string>
+    <string name="device_market_place">Amazon</string>
+    <string name="device_nook_ean_number">9999999999999</string>
     <string name="app_publisher_name">Kevin Hinds</string>
     <string name="app_name">fremium</string>
     <string name="menu_settings">Settings</string>

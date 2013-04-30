@@ -27,7 +27,7 @@ public class MainActivity extends Activity {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		String packageName = getApplicationContext().getPackageName();
 		MarketPlace marketPlace = new MarketPlace(this, packageName);
-		Intent intent = marketPlace.viewAllApps(item.getItemId(), this);
+		Intent intent = marketPlace.viewAllPublisherAppsIntent(this);
 		if (intent != null) {
 			startActivity(intent);
 		}
