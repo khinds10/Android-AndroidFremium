@@ -1,7 +1,6 @@
 package com.kevinhinds.fremium;
 
 import com.kevinhinds.fremium.marketplace.MarketPlace;
-
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
@@ -25,12 +24,36 @@ public class MainActivity extends Activity {
 	/** handle user selecting a menu item */
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		String packageName = getApplicationContext().getPackageName();
-		MarketPlace marketPlace = new MarketPlace(this, packageName);
-		Intent intent = marketPlace.viewAllPublisherAppsIntent(this);
+		switch (item.getItemId()) {
+		case R.id.menu_bitstreet:
+			viewAllPublisherApps();
+			break;
+		case R.id.menu_fullversion:
+			viewPremiumApp();
+			break;
+		}
+		return true;
+	}
+
+	/**
+	 * view all apps on the device marketplace for current publisher
+	 */
+	public void viewAllPublisherApps() {
+		MarketPlace marketPlace = new MarketPlace(this);
+		Intent intent = marketPlace.getViewAllPublisherAppsIntent(this);
 		if (intent != null) {
 			startActivity(intent);
 		}
-		return false;
+	}
+
+	/**
+	 * view the premium version of this app
+	 */
+	public void viewPremiumApp() {
+		MarketPlace marketPlace = new MarketPlace(this);
+		Intent intent = marketPlace.getViewPremiumAppIntent(this);
+		if (intent != null) {
+			startActivity(intent);
+		}
 	}
 }

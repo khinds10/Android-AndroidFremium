@@ -48,9 +48,9 @@ public class MarketPlace {
 	 * @param context
 	 * @param thisPackageName
 	 */
-	public MarketPlace(Context context, String thisPackageName) {
+	public MarketPlace(Context context) {
 		String deviceMarketPlaceName = context.getResources().getString(R.string.device_market_place);
-		packageName = thisPackageName;
+		packageName = context.getApplicationContext().getPackageName();
 		if (deviceMarketPlaceName.toUpperCase().equals("GOOGLE")) {
 			marketLocale = MarketLocale.GOOGLE;
 		} else if (deviceMarketPlaceName.toUpperCase().equals("AMAZON")) {
@@ -66,7 +66,7 @@ public class MarketPlace {
 	 * @param context
 	 * @return
 	 */
-	public Intent viewPremiumAppIntent(Context context) {
+	public Intent getViewPremiumAppIntent(Context context) {
 		return getMarketPlaceIntent(context, false);
 	}
 
@@ -76,7 +76,7 @@ public class MarketPlace {
 	 * @param context
 	 * @return
 	 */
-	public Intent viewAllPublisherAppsIntent(Context context) {
+	public Intent getViewAllPublisherAppsIntent(Context context) {
 		return getMarketPlaceIntent(context, true);
 	}
 
@@ -124,7 +124,6 @@ public class MarketPlace {
 				intent = new Intent();
 				intent.setAction("com.bn.sdk.shop.details");
 				intent.putExtra("product_details_ean", deviceNookEANNumber);
-
 				String appName = context.getResources().getString(R.string.app_name);
 				appName = appName.replace(" ", "-").toLowerCase();
 				appPublisherName = appPublisherName.replace(" ", "-").toLowerCase();
@@ -153,6 +152,9 @@ public class MarketPlace {
 	 * @return
 	 */
 	protected static boolean isIntentAvailable(Context context, Intent intent) {
+		if (intent == null) {
+			return false;
+		}
 		final PackageManager packageManager = context.getPackageManager();
 		List<ResolveInfo> list = packageManager.queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY);
 		return list.size() > 0;
