@@ -49,8 +49,8 @@ public class MarketPlace {
 	 * @param thisPackageName
 	 */
 	public MarketPlace(Context context) {
-		String deviceMarketPlaceName = context.getResources().getString(R.string.device_market_place);
-		packageName = context.getApplicationContext().getPackageName();
+		String deviceMarketPlaceName = getDevice();
+		packageName = context.getResources().getString(R.string.app_full_version_package);
 		if (deviceMarketPlaceName.toUpperCase().equals("GOOGLE")) {
 			marketLocale = MarketLocale.GOOGLE;
 		} else if (deviceMarketPlaceName.toUpperCase().equals("AMAZON")) {
@@ -58,6 +58,21 @@ public class MarketPlace {
 		} else if (deviceMarketPlaceName.toUpperCase().equals("NOOK")) {
 			marketLocale = MarketLocale.NOOK;
 		}
+	}
+
+	/**
+	 * get device manufacture to provide the correct marketplace intent(s)
+	 * 
+	 * @return Amazon|Nook|Google
+	 */
+	public String getDevice() {
+		String manufacturer = android.os.Build.MANUFACTURER;
+		if (manufacturer.toLowerCase().contains("amazon")) {
+			return "Amazon";
+		} else if (manufacturer.toLowerCase().contains("nook") || manufacturer.toLowerCase().contains("barnes")) {
+			return "Nook";
+		}
+		return "Google";
 	}
 
 	/**
@@ -89,7 +104,7 @@ public class MarketPlace {
 	 */
 	protected Intent getMarketPlaceIntent(Context context, boolean showAll) {
 
-		String appPublisherName = context.getResources().getString(R.string.app_publisher_name);
+		String appPublisherName = context.getResources().getString(R.string.app_publisher_name);		
 		String deviceMarketPlaceWeburl = null;
 		intent = new Intent(Intent.ACTION_VIEW);
 

@@ -1,11 +1,12 @@
 <resources>
 
-    <!-- Google, Amazon, Nook -->
-    <string name="device_market_place">Amazon</string>
+    <string name="app_full_version_package">com.kevinhinds.sleeptube</string>
     <string name="device_nook_ean_number">9999999999999</string>
     <string name="app_publisher_name">Kevin Hinds</string>
     <string name="menu_bitstreet">Bitstreet Apps</string>
     <string name="menu_fullversion">Get the Full Version!</string>
     <string name="app_name">fremium</string>
+    <string name="latest_update_notes">TEST</string>
+    <string name="latest_update_example">Latest Updates\n\nItem #1\nItem #2\n\nThanks for downloading!</string>
 
 </resources>

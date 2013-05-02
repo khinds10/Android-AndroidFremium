@@ -1,6 +1,8 @@
 package com.kevinhinds.fremium;
 
 import com.kevinhinds.fremium.marketplace.MarketPlace;
+import com.kevinhinds.fremium.updates.LatestUpdates;
+
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
@@ -13,6 +15,8 @@ public class MainActivity extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		
+		LatestUpdates.showFirstInstalledNotes(this);
 	}
 
 	@Override
