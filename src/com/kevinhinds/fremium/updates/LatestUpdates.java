@@ -1,5 +1,5 @@
 /**
- * 
+ * Package to show the latest updates for a newly installed app
  */
 package com.kevinhinds.fremium.updates;
 

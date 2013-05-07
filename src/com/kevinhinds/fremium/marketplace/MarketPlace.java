@@ -33,7 +33,7 @@ public class MarketPlace {
 	protected MarketLocale marketLocale;
 
 	/**
-	 * market place standard url for a browser to open the device market place
+	 * the package name of the premium version of the application
 	 */
 	protected String packageName;
 
@@ -46,7 +46,6 @@ public class MarketPlace {
 	 * construct MarketPlace
 	 * 
 	 * @param context
-	 * @param thisPackageName
 	 */
 	public MarketPlace(Context context) {
 		String deviceMarketPlaceName = getDevice();
@@ -61,9 +60,9 @@ public class MarketPlace {
 	}
 
 	/**
-	 * get device manufacture to provide the correct marketplace intent(s)
+	 * get device manufacturer to provide the correct marketplace intent(s)
 	 * 
-	 * @return Amazon|Nook|Google
+	 * @return string Amazon|Nook|Google
 	 */
 	public String getDevice() {
 		String manufacturer = android.os.Build.MANUFACTURER;
@@ -104,7 +103,7 @@ public class MarketPlace {
 	 */
 	protected Intent getMarketPlaceIntent(Context context, boolean showAll) {
 
-		String appPublisherName = context.getResources().getString(R.string.app_publisher_name);		
+		String appPublisherName = context.getResources().getString(R.string.app_publisher_name);
 		String deviceMarketPlaceWeburl = null;
 		intent = new Intent(Intent.ACTION_VIEW);
 

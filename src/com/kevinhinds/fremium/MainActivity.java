@@ -15,13 +15,20 @@ public class MainActivity extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		
+
+		/** show the latest update notes if the application was just installed */
 		LatestUpdates.showFirstInstalledNotes(this);
 	}
 
+	/** create the main menu based on if the app is the full version or not */
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		getMenuInflater().inflate(R.menu.activity_main, menu);
+		String isFullVersion = getResources().getString(R.string.is_full_version);
+		if (isFullVersion.toLowerCase().equals("true")) {
+			getMenuInflater().inflate(R.menu.main_full, menu);
+		} else {
+			getMenuInflater().inflate(R.menu.main, menu);
+		}
 		return true;
 	}
 
