@@ -4,9 +4,7 @@
 package com.kevinhinds.fremium.marketplace;
 
 import java.util.List;
-
 import com.kevinhinds.fremium.R;
-
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -104,6 +102,7 @@ public class MarketPlace {
 	protected Intent getMarketPlaceIntent(Context context, boolean showAll) {
 
 		String appPublisherName = context.getResources().getString(R.string.app_publisher_name);
+		String appPublisherPackage = context.getResources().getString(R.string.app_publisher_package);
 		String deviceMarketPlaceWeburl = null;
 		intent = new Intent(Intent.ACTION_VIEW);
 
@@ -124,9 +123,13 @@ public class MarketPlace {
 			if (showAll) {
 				showAllParam = "&showAll=1";
 			}
-			intent = new Intent(Intent.ACTION_VIEW);
-			intent.setData(Uri.parse("amzn://apps/android?p=" + packageName + showAllParam));
 			deviceMarketPlaceWeburl = "http://www.amazon.com/gp/mas/dl/android?p=" + packageName + showAllParam;
+			intent = new Intent(Intent.ACTION_VIEW);
+			if (showAll) {
+				intent.setData(Uri.parse("amzn://apps/android?s=" + appPublisherPackage + showAllParam));
+			} else {
+				intent.setData(Uri.parse("amzn://apps/android?p=" + packageName));
+			}
 			break;
 		case NOOK:
 			if (showAll) {
