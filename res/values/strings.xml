@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">fremium</string>
     <string name="hello_pollfish">Hello Pollfish! This Activity demonstrates how you can use Pollfish in your app. Please note, that this activity is recreated on each orientation change </string>
     <string name="hide">Hide</string>
     <string name="show">Show</string>
@@ -16,17 +15,7 @@
     <string name="landscape_warn">Pollfish is only shown in Portrait mode, except in tablets</string>
     <string name="survey_completed">Pollfish Survey Completed - Congratulations, you have won 200 coins!</string>
     <string name="logging">Logging area..</string>
-    <string name="user_not_eligible">User Not Eligible</string>
-    <string name="not_available">Pollfish Survey Not Available</string>
-    <string name="is_full_version">false</string>
-    <string name="app_full_version_package">com.kevinhinds.sleeptube</string>
-    <string name="device_nook_ean_number">9999999999999</string>
-    <string name="app_publisher_name">Kevin Hinds</string>
-    <string name="app_publisher_package">com.kevinhinds</string>
-    <string name="menu_bitstreet">Bitstreet Apps</string>
-    <string name="menu_fullversion">Get the Full Version!</string>
-    <string name="latest_update_notes"></string>
-    <string name="latest_update_example">Latest Updates\n\nItem #1\nItem #2\n\nThanks for downloading!</string>
-    <string name="marketplace_name"></string>
+    <string name="pollfish_not_available">Pollfish Survey Not Available</string>
+    <string name="pollfish_user_not_eligible">User Not Eligible</string>
 
 </resources>

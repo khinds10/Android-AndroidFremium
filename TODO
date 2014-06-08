@@ -1,7 +1,13 @@
 
 		[] Fix the Freemium Android Base App
 			
+			[TEST!] It should correctly display updates based on if the version number is "missing all together" or "older" than
+				the one in the current SQLite entry for the app, this way it will catch a new or updated install
+			
+			[TEST] Have a "featured" app (copy the tricorder app extra intent)
+			
 			[] Monitize freemium versions ability  - Pollfish Support
+				[] Turn on and off Pollfish
 				[] create the hooks to tell me if people are entering / completing polls
 				[] have a config to enable pollfish or not
 			
@@ -11,31 +17,6 @@
 					
 				[] Universal Pollfish
 					[] need generic JAR
-			
-			[] It should have the marketplace, full verion etc in a proper config.xml file
-				-- this file has the most recent updates as well
-				
-			[] It should correctly display updates based on if the version number is "missing all together" or "older" than
-				the one in the current SQLite entry for the app, this way it will catch a new or updated install
-								
 
 			[] Finish Reading
-				https://www.pollfish.com/#/android		
-			
-			So for everyone using eclipse, this is how it's done:
-
-				Eclipse -> import -> existing android code -> browse -> navigate to google-play-services_lib FOLDER (android-sdk/extras/google/google_play_services/libproject).
-
-				then, on your project, control click -> properties -> android -> libraries, add -> select the project you just imported -> ok
-
-			Updates:
-			
-				Have the Settings removed from "strings.xml"
-					pu them in settings.xml
-
-			It should have the ability to:
-			
-				Turn on and off Pollfish
-				Have a "featured" app (copy the tricorder app extra intent)
-				
-			BOTH apps are identical, but the "full" version just has no pollfish running
+				https://www.pollfish.com/#/android

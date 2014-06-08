@@ -21,15 +21,13 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 
-public class MainActivity extends Activity implements
-		PollfishSurveyCompletedListener, PollfishOpenedListener,
-		PollfishClosedListener, PollfishSurveyReceivedListener,
+public class MainActivity extends Activity implements PollfishSurveyCompletedListener, PollfishOpenedListener, PollfishClosedListener, PollfishSurveyReceivedListener,
 		PollfishSurveyNotAvailableListener, PollfishUserNotEligibleListener {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
+
 		setContentView(R.layout.activity_main);
 
 		// show Pollfish if available anywhere within the activity LifeCycle
@@ -61,8 +59,7 @@ public class MainActivity extends Activity implements
 
 			@Override
 			public void onClick(View v) {
-				Intent intent = new Intent(MainActivity.this,
-						OrientationActivity.class);
+				Intent intent = new Intent(MainActivity.this, OrientationActivity.class);
 
 				startActivity(intent);
 
@@ -76,8 +73,7 @@ public class MainActivity extends Activity implements
 
 			@Override
 			public void onClick(View v) {
-				Intent intent = new Intent(MainActivity.this,
-						IncentivizeActivity.class);
+				Intent intent = new Intent(MainActivity.this, IncentivizeActivity.class);
 
 				startActivity(intent);
 
@@ -92,11 +88,10 @@ public class MainActivity extends Activity implements
 		super.onResume();
 
 		/**
-		 * Start the library. Set the api key. Choose position to place the
-		 * indicator (Position.TOP_LEFT, Position.BOTTOM_LEFT,MIDDLE_LEFT,
-		 * Position.TOP_RIGHT, Position.BOTTOM_RIGHT, MIDDLE_RIGHT). Set padding
-		 * for the indicator position from bottom/middle or top according to
-		 * position, 0 if default.
+		 * Start the library. Set the api key. Choose position to place the indicator
+		 * (Position.TOP_LEFT, Position.BOTTOM_LEFT,MIDDLE_LEFT, Position.TOP_RIGHT,
+		 * Position.BOTTOM_RIGHT, MIDDLE_RIGHT). Set padding for the indicator position from
+		 * bottom/middle or top according to position, 0 if default.
 		 * 
 		 * @param act
 		 *            - Your current activity
@@ -105,17 +100,14 @@ public class MainActivity extends Activity implements
 		 * @param p
 		 *            - The position to place the pollfish indicator
 		 * @param indPadding
-		 *            - padding between the indicator and the selected position
-		 *            in the screen - 0 for default
+		 *            - padding between the indicator and the selected position in the screen - 0
+		 *            for default
 		 * 
-		 *            e.g PollFish.init(this,
-		 *            "2ad6e857-2995-4668-ab95-39e068faa558",
+		 *            e.g PollFish.init(this, "2ad6e857-2995-4668-ab95-39e068faa558",
 		 *            Position.BOTTOM_RIGHT,5);
 		 */
 
-		PollFish.init(this, "YOUR_API_KEY",
-				Position.BOTTOM_RIGHT, 65);
-
+		PollFish.init(this, getString(R.string.pollfish_api_key), Position.BOTTOM_LEFT, 5);
 	}
 
 	@Override
@@ -149,15 +141,20 @@ public class MainActivity extends Activity implements
 		Log.d("Pollfish", "onUserNotEligible()");
 
 	}
+
+	/** make parts of the menu invisible based on settings */
+	@Override
+	public boolean onPrepareOptionsMenu(Menu menu) {
+		super.onPrepareOptionsMenu(menu);
+		menu.findItem(R.id.menu_fullversion).setVisible(!Boolean.parseBoolean(getResources().getString(R.string.is_full_version)));
+		menu.findItem(R.id.menu_suggested).setVisible(Boolean.parseBoolean(getResources().getString(R.string.has_suggested_app)));
+		return true;
+	}
+
 	/** create the main menu based on if the app is the full version or not */
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		String isFullVersion = getResources().getString(R.string.is_full_version);
-		if (isFullVersion.toLowerCase().equals("true")) {
-			getMenuInflater().inflate(R.menu.main_full, menu);
-		} else {
-			getMenuInflater().inflate(R.menu.main, menu);
-		}
+		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}
 
@@ -171,8 +168,22 @@ public class MainActivity extends Activity implements
 		case R.id.menu_fullversion:
 			viewPremiumApp();
 			break;
+		case R.id.menu_suggested:
+			viewSuggestedApp();
+			break;
 		}
 		return true;
+	}
+
+	/**
+	 * get the suggested app intent
+	 */
+	public void viewSuggestedApp() {
+		MarketPlace marketPlace = new MarketPlace(this);
+		Intent intent = marketPlace.getViewSuggestedAppIntent(this);
+		if (intent != null) {
+			startActivity(intent);
+		}
 	}
 
 	/**

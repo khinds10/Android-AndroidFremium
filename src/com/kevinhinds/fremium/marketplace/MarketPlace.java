@@ -4,7 +4,9 @@
 package com.kevinhinds.fremium.marketplace;
 
 import java.util.List;
+
 import com.kevinhinds.fremium.R;
+
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -90,7 +92,17 @@ public class MarketPlace {
 	 * @return
 	 */
 	public Intent getViewPremiumAppIntent(Context context) {
-		return getMarketPlaceIntent(context, false);
+		return getMarketPlaceIntent(context, false, null);
+	}
+
+	/**
+	 * get the suggested app intent
+	 * 
+	 * @param context
+	 * @return
+	 */
+	public Intent getViewSuggestedAppIntent(Context context) {
+		return getMarketPlaceIntent(context, false, context.getResources().getString(R.string.suggested_app_package));
 	}
 
 	/**
@@ -100,20 +112,27 @@ public class MarketPlace {
 	 * @return
 	 */
 	public Intent getViewAllPublisherAppsIntent(Context context) {
-		return getMarketPlaceIntent(context, true);
+		return getMarketPlaceIntent(context, true, null);
 	}
 
 	/**
-	 * get the intent for the device specific marketplace either for a single app or all apps from the publisher
+	 * get the intent for the device specific marketplace either for a single app or all apps from
+	 * the publisher
 	 * 
 	 * @param context
 	 * @param showAll
+	 * @param appPackageName
+	 *            , custom override of the package name to be loaded
 	 * @return
 	 */
-	protected Intent getMarketPlaceIntent(Context context, boolean showAll) {
+	protected Intent getMarketPlaceIntent(Context context, boolean showAll, String appPackageName) {
 
 		String appPublisherName = context.getResources().getString(R.string.app_publisher_name);
 		String appPublisherPackage = context.getResources().getString(R.string.app_publisher_package);
+		if (!(appPackageName == null)) {
+			packageName = appPackageName;
+		}
+
 		String deviceMarketPlaceWeburl = null;
 		intent = new Intent(Intent.ACTION_VIEW);
 
@@ -160,7 +179,10 @@ public class MarketPlace {
 			break;
 		}
 
-		/** if we don't have the marketplace for the device available as an intent, attempt to produce a standard webpage URL to open */
+		/**
+		 * if we don't have the marketplace for the device available as an intent, attempt to
+		 * produce a standard webpage URL to open
+		 */
 		if (MarketPlace.isIntentAvailable(context, intent)) {
 			return intent;
 		} else {

@@ -17,9 +17,7 @@ import com.pollfish.interfaces.PollfishUserNotEligibleListener;
 import com.pollfish.main.PollFish;
 import com.pollfish.constants.Position;
 
-public class IncentivizeActivity extends Activity implements
-		PollfishSurveyCompletedListener, PollfishOpenedListener,
-		PollfishClosedListener, PollfishSurveyReceivedListener,
+public class IncentivizeActivity extends Activity implements PollfishSurveyCompletedListener, PollfishOpenedListener, PollfishClosedListener, PollfishSurveyReceivedListener,
 		PollfishSurveyNotAvailableListener, PollfishUserNotEligibleListener {
 
 	private Button coinsBtn;
@@ -99,7 +97,7 @@ public class IncentivizeActivity extends Activity implements
 		runOnUiThread(new Runnable() {
 			@Override
 			public void run() {
-				loggingTxt.setText(getString(R.string.not_available));
+				loggingTxt.setText(getString(R.string.pollfish_not_available));
 			}
 		});
 	}
@@ -111,7 +109,7 @@ public class IncentivizeActivity extends Activity implements
 		runOnUiThread(new Runnable() {
 			@Override
 			public void run() {
-				loggingTxt.setText(getString(R.string.user_not_eligible));
+				loggingTxt.setText(getString(R.string.pollfish_user_not_eligible));
 			}
 		});
 
@@ -122,9 +120,8 @@ public class IncentivizeActivity extends Activity implements
 		super.onResume();
 
 		Log.d("Pollfish", "onResume() ");
-		
-		PollFish.customInit(IncentivizeActivity.this, "YOUR_API_KEY",
-				Position.MIDDLE_LEFT, 5);
+
+		PollFish.customInit(IncentivizeActivity.this, getString(R.string.pollfish_api_key), Position.BOTTOM_LEFT, 5);
 
 		PollFish.hide();
 
