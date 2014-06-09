@@ -4,6 +4,7 @@
 package com.kevinhinds.fremium.marketplace;
 
 import java.util.List;
+import java.util.Locale;
 
 import com.kevinhinds.fremium.R;
 
@@ -50,11 +51,11 @@ public class MarketPlace {
 	public MarketPlace(Context context) {
 		String deviceMarketPlaceName = getDevice(context);
 		packageName = context.getResources().getString(R.string.app_full_version_package);
-		if (deviceMarketPlaceName.toUpperCase().equals("GOOGLE")) {
+		if (deviceMarketPlaceName.toUpperCase(Locale.ENGLISH).equals("GOOGLE")) {
 			marketLocale = MarketLocale.GOOGLE;
-		} else if (deviceMarketPlaceName.toUpperCase().equals("AMAZON")) {
+		} else if (deviceMarketPlaceName.toUpperCase(Locale.ENGLISH).equals("AMAZON")) {
 			marketLocale = MarketLocale.AMAZON;
-		} else if (deviceMarketPlaceName.toUpperCase().equals("NOOK")) {
+		} else if (deviceMarketPlaceName.toUpperCase(Locale.ENGLISH).equals("NOOK")) {
 			marketLocale = MarketLocale.NOOK;
 		}
 	}
@@ -68,17 +69,17 @@ public class MarketPlace {
 	public String getDevice(Context context) {
 		String marketplaceName = context.getResources().getString(R.string.marketplace_name);
 		if (!marketplaceName.equals("")) {
-			if (marketplaceName.toUpperCase().equals("AMAZON")) {
+			if (marketplaceName.toUpperCase(Locale.ENGLISH).equals("AMAZON")) {
 				return "Amazon";
-			} else if (marketplaceName.toUpperCase().equals("NOOK")) {
+			} else if (marketplaceName.toUpperCase(Locale.ENGLISH).equals("NOOK")) {
 				return "Nook";
 			}
 			return "Google";
 		} else {
 			String manufacturer = android.os.Build.MANUFACTURER;
-			if (manufacturer.toLowerCase().contains("amazon")) {
+			if (manufacturer.toLowerCase(Locale.ENGLISH).contains("amazon")) {
 				return "Amazon";
-			} else if (manufacturer.toLowerCase().contains("nook") || manufacturer.toLowerCase().contains("barnes")) {
+			} else if (manufacturer.toLowerCase(Locale.ENGLISH).contains("nook") || manufacturer.toLowerCase(Locale.ENGLISH).contains("barnes")) {
 				return "Nook";
 			}
 			return "Google";
@@ -208,5 +209,38 @@ public class MarketPlace {
 		final PackageManager packageManager = context.getPackageManager();
 		List<ResolveInfo> list = packageManager.queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY);
 		return list.size() > 0;
+	}
+
+	/**
+	 * get the suggested app intent
+	 */
+	public static void viewSuggestedApp(Context context) {
+		MarketPlace marketPlace = new MarketPlace(context);
+		Intent intent = marketPlace.getViewSuggestedAppIntent(context);
+		if (intent != null) {
+			context.startActivity(intent);
+		}
+	}
+
+	/**
+	 * view all apps on the device marketplace for current publisher
+	 */
+	public static void viewAllPublisherApps(Context context) {
+		MarketPlace marketPlace = new MarketPlace(context);
+		Intent intent = marketPlace.getViewAllPublisherAppsIntent(context);
+		if (intent != null) {
+			context.startActivity(intent);
+		}
+	}
+
+	/**
+	 * view the premium version of this app
+	 */
+	public static void viewPremiumApp(Context context) {
+		MarketPlace marketPlace = new MarketPlace(context);
+		Intent intent = marketPlace.getViewPremiumAppIntent(context);
+		if (intent != null) {
+			context.startActivity(intent);
+		}
 	}
 }

@@ -1,16 +1,22 @@
 
-		[] Fix the Freemium Android Base App
+		[TEST!] Fix the Freemium Android Base App
+		
+				Full version set or not
+					[] should show "full version (remove ads)" in the menu
+					
+				MarketPlace names
+					[] Google, Amazon, Nook -- should go to the right store
+		
+				Pollfish enabled
+					[] should make the little icon disappear or reappear
 			
-			[TEST!] It should correctly display updates based on if the version number is "missing all together" or "older" than
-				the one in the current SQLite entry for the app, this way it will catch a new or updated install
-			
-			[TEST] Have a "featured" app (copy the tricorder app extra intent)
-			
-			[] Monitize freemium versions ability  - Pollfish Support
-				[] Turn on and off Pollfish
-				[] create the hooks to tell me if people are entering / completing polls
-				[] have a config to enable pollfish or not
-			
+  				Suggested App
+  					[] have it show an additional menu item with a link to suggested app	
+    		
+    			Latest Update Notes
+    				[] shown on first install
+    				[] shown on "updated" app version
+    			
 			Notes:
 				[] Google Play Pollfish
 					[] need special JAR
