@@ -1,7 +1,7 @@
 package com.kevinhinds.fremium;
 
-import com.pollfish.constants.Position;
 import com.pollfish.main.PollFish;
+import com.pollfish.constants.Position;
 import com.kevinhinds.fremium.marketplace.MarketPlace;
 import com.kevinhinds.fremium.updates.LatestUpdates;
 
@@ -16,7 +16,7 @@ public class MainActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main);
+		setContentView(R.layout.freemium);
 
 		/** show the latest update notes if the application was just installed */
 		LatestUpdates.showFirstInstalledNotes(this);

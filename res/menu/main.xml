@@ -11,6 +11,6 @@
     <item
         android:id="@+id/menu_suggested"
         android:orderInCategory="100"
-        android:title="@string/suggested_app_package"/>
+        android:title="@string/suggested_app_menu"/>
 
 </menu>

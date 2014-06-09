@@ -14,3 +14,6 @@
 -keepnames class * implements android.os.Parcelable {
     public static final ** CREATOR;
 }
+
+-libraryjars libs/pollfish.jar
+-keep class com.pollfish.** { *; }
