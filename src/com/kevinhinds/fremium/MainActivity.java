@@ -34,7 +34,7 @@ public class MainActivity extends Activity {
 	public void onResume() {
 		super.onResume();
 		if (Boolean.parseBoolean(getResources().getString(R.string.pollfish_enabled))) {
-			PollFish.init(this, getString(R.string.pollfish_api_key), Position.BOTTOM_RIGHT, 5);
+			PollFish.init(this, getString(R.string.pollfish_api_key), Position.BOTTOM_LEFT, 5);
 		}
 	}
 
