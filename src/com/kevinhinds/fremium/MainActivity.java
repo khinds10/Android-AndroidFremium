@@ -4,6 +4,7 @@ import com.pollfish.main.PollFish;
 import com.pollfish.constants.Position;
 import com.kevinhinds.fremium.marketplace.MarketPlace;
 import com.kevinhinds.fremium.updates.LatestUpdates;
+import com.google.android.gms.ads.*;
 
 import android.os.Bundle;
 import android.app.Activity;
@@ -20,6 +21,11 @@ public class MainActivity extends Activity {
 
 		/** show the latest update notes if the application was just installed */
 		LatestUpdates.showFirstInstalledNotes(this);
+
+		/** Look up the AdView as a resource and load a request */
+		AdView adView = (AdView) this.findViewById(R.id.adView);
+		AdRequest adRequest = new AdRequest.Builder().build();
+		adView.loadAd(adRequest);
 	}
 
 	@Override
