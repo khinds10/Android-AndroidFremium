@@ -23,9 +23,11 @@ public class MainActivity extends Activity {
 		LatestUpdates.showFirstInstalledNotes(this);
 
 		/** Look up the AdView as a resource and load a request */
-		AdView adView = (AdView) this.findViewById(R.id.adView);
-		AdRequest adRequest = new AdRequest.Builder().build();
-		adView.loadAd(adRequest);
+		if (Boolean.parseBoolean(getResources().getString(R.string.admob_enabled))) {
+			AdView adView = (AdView) this.findViewById(R.id.adView);
+			AdRequest adRequest = new AdRequest.Builder().build();
+			adView.loadAd(adRequest);
+		}
 	}
 
 	@Override
