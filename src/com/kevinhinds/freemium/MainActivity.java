@@ -1,9 +1,9 @@
-package com.kevinhinds.fremium;
+package com.kevinhinds.freemium;
 
 import com.pollfish.main.PollFish;
 import com.pollfish.constants.Position;
-import com.kevinhinds.fremium.marketplace.MarketPlace;
-import com.kevinhinds.fremium.updates.LatestUpdates;
+import com.kevinhinds.freemium.marketplace.MarketPlace;
+import com.kevinhinds.freemium.updates.LatestUpdates;
 import com.google.android.gms.ads.*;
 
 import android.os.Bundle;
@@ -17,7 +17,7 @@ public class MainActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.fremium);
+		setContentView(R.layout.freemium);
 
 		/** show the latest update notes if the application was just installed */
 		LatestUpdates.showFirstInstalledNotes(this);

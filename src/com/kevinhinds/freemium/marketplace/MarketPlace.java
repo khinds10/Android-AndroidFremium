@@ -1,12 +1,12 @@
 /**
  * Generic market place specific intent manager for Bitstreet Apps
  */
-package com.kevinhinds.fremium.marketplace;
+package com.kevinhinds.freemium.marketplace;
 
 import java.util.List;
 import java.util.Locale;
 
-import com.kevinhinds.fremium.R;
+import com.kevinhinds.freemium.R;
 
 import android.content.Context;
 import android.content.Intent;
