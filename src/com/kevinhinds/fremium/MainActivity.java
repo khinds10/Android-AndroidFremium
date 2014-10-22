@@ -17,7 +17,7 @@ public class MainActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.freemium);
+		setContentView(R.layout.fremium);
 
 		/** show the latest update notes if the application was just installed */
 		LatestUpdates.showFirstInstalledNotes(this);
