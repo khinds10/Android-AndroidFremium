@@ -5,12 +5,14 @@ import com.pollfish.constants.Position;
 import com.kevinhinds.freemium.marketplace.MarketPlace;
 import com.kevinhinds.freemium.updates.LatestUpdates;
 import com.google.android.gms.ads.*;
+import com.appjolt.winback.Winback;
 
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.res.Configuration;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.RelativeLayout;
 
 public class MainActivity extends Activity {
 
@@ -19,12 +21,25 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.freemium);
 
+		/** Appjolt - Init SDK if it's Enabled */
+		if (Boolean.parseBoolean(getResources().getString(R.string.appjolt_enabled))) {
+			Winback.init(this);
+		}
+
 		/** show the latest update notes if the application was just installed */
 		LatestUpdates.showFirstInstalledNotes(this);
 
 		/** Look up the AdView as a resource and load a request */
 		if (Boolean.parseBoolean(getResources().getString(R.string.admob_enabled))) {
-			AdView adView = (AdView) this.findViewById(R.id.adView);
+
+			/** setup the adMob Ad */
+			AdView adView = new AdView(this);
+			adView.setAdUnitId(getResources().getString(R.string.admob_ads_id));
+			adView.setAdSize(AdSize.BANNER);
+
+			/** apply it to the bottom of the screen */
+			RelativeLayout layout = (RelativeLayout) findViewById(R.id.adViewContainer);
+			layout.addView(adView);
 			AdRequest adRequest = new AdRequest.Builder().build();
 			adView.loadAd(adRequest);
 		}

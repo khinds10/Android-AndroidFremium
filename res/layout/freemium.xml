@@ -15,17 +15,11 @@
         android:text="@string/freemium"
         android:textColor="@android:color/black" />
 
-    <LinearLayout
+    <RelativeLayout
+        android:id="@+id/adViewContainer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical" >
-
-        <com.google.android.gms.ads.AdView
-            android:id="@+id/adView"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            ads:adSize="BANNER"
-            ads:adUnitId="ca-app-pub-6863280069736596/3456810241" />
-    </LinearLayout>
+    </RelativeLayout>
 
 </RelativeLayout>

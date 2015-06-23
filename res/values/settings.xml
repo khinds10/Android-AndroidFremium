@@ -13,12 +13,15 @@
 
     <!-- PollFish -->
     <string name="pollfish_enabled">true</string>
-    <string name="pollfish_api_key">8151b8cd-ace6-402c-b360-e4b7d360cb97</string>
+    <string name="pollfish_api_key">2ede7b51-fe33-4409-9e59-461fb58081f1</string>
 
     <!-- AdsMob -->
     <string name="admob_enabled">true</string>
-    <string name="admob_ads_id">ca-app-pub-6863280069736596/6898919041</string>
+    <string name="admob_ads_id">ca-app-pub-6863280069736596/3456810241</string>
 
+    <!-- AppJolt -->
+    <string name="appjolt_enabled">true</string>
+  
     <!-- Suggested App Package -->
     <string name="has_suggested_app">true</string>
     <string name="suggested_app_menu">New Free App!</string>
